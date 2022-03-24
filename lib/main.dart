@@ -9,7 +9,23 @@ import 'package:travel/providers/login_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  const firebaseConfig = FirebaseOptions(
+      apiKey: "AIzaSyCDRqFNK5PE8RkrnDn1zpjVpDzYFlZRhkU",
+      authDomain: "travel-app-75543.firebaseapp.com",
+      projectId: "travel-app-75543",
+      storageBucket: "travel-app-75543.appspot.com",
+      messagingSenderId: "938334089870",
+      appId: "1:938334089870:web:c660e58b1ef69e4fca8fdf");
+
+  try {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(options: firebaseConfig).whenComplete(() {
+        print("completedAppInitialize");
+      });
+    }
+  } catch (e) {
+    print(e);
+  }
   configureDependencies();
   runApp(MyApp());
 }
